@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <title>Living Innovation</title>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -20,33 +22,29 @@
             overflow-x: hidden;
         }
 
-        /* Main section */
         .section {
             width: 100%;
             padding: 70px 0 100px;
         }
 
-        /* Title */
         .title {
             text-align: center;
             padding: 0 20px;
         }
 
         .title h1 {
-            font-size: clamp(32px, 5vw, 58px);
+            font-size: clamp(36px, 6vw, 64px);
             font-weight: 500;
-            letter-spacing: -1px;
-            margin-bottom: 15px;
+            letter-spacing: -2px;
+            margin-bottom: 16px;
         }
 
         .title p {
             color: #aaa;
             font-size: 16px;
             line-height: 1.6;
-            letter-spacing: 0.3px;
         }
 
-        /* Image area */
         .gallery {
             width: 100%;
             overflow: hidden;
@@ -57,33 +55,22 @@
             display: flex;
             width: max-content;
             gap: 18px;
-
             animation: scroll 35s linear infinite;
         }
 
-        /* Pause when mouse is over the gallery */
         .gallery:hover .track {
             animation-play-state: paused;
         }
 
-        /* Images */
         .photo {
             width: 260px;
             height: 320px;
-
-            flex-shrink: 0;
-
             object-fit: cover;
-
+            flex-shrink: 0;
             display: block;
-
             border-radius: 2px;
-
             filter: brightness(0.9);
-
-            transition:
-                transform 0.4s ease,
-                filter 0.4s ease;
+            transition: transform 0.4s ease, filter 0.4s ease;
         }
 
         .photo:hover {
@@ -91,32 +78,28 @@
             filter: brightness(1);
         }
 
-        /* Infinite scrolling */
         @keyframes scroll {
+
             from {
                 transform: translateX(0);
             }
 
             to {
-                transform: translateX(calc(-50% - 9px));
+                transform: translateX(-50%);
             }
+
         }
 
-        /* Bottom description */
         .bottom-text {
             max-width: 700px;
             margin: 65px auto 0;
             padding: 0 25px;
-
             text-align: center;
-
             color: #777;
-
             font-size: 14px;
             line-height: 1.8;
         }
 
-        /* Mobile */
         @media (max-width: 600px) {
 
             .section {
@@ -140,15 +123,18 @@
             .bottom-text {
                 margin-top: 45px;
             }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
     <section class="section">
 
-        <!-- Title -->
         <div class="title">
 
             <h1>Living Innovation</h1>
@@ -160,48 +146,13 @@
         </div>
 
 
-        <!-- Gallery -->
         <div class="gallery">
 
-            <div class="track">
-
-                <!-- First set -->
-                < img class="photo" src="living-1.jpg" alt="Living Innovation 1">
-                < img class="photo" src="living-2.jpg" alt="Living Innovation 2">
-                < img class="photo" src="living-3.jpg" alt="Living Innovation 3">
-                < img class="photo" src="living-4.jpg" alt="Living Innovation 4">
-                < img class="photo" src="living-5.jpg" alt="Living Innovation 5">
-                < img class="photo" src="living-6.jpg" alt="Living Innovation 6">
-                < img class="photo" src="living-7.jpg" alt="Living Innovation 7">
-                < img class="photo" src="living-8.jpg" alt="Living Innovation 8">
-                < img class="photo" src="living-9.jpg" alt="Living Innovation 9">
-                < img class="photo" src="living-10.jpg" alt="Living Innovation 10">
-                < img class="photo" src="living-11.jpg" alt="Living Innovation 11">
-                < img class="photo" src="living-12.jpg" alt="Living Innovation 12">
-                < img class="photo" src="living-13.jpg" alt="Living Innovation 13">
-
-
-                <!-- Second set for seamless loop -->
-                < img class="photo" src="living-1.jpg" alt="Living Innovation 1">
-                < img class="photo" src="living-2.jpg" alt="Living Innovation 2">
-                < img class="photo" src="living-3.jpg" alt="Living Innovation 3">
-                < img class="photo" src="living-4.jpg" alt="Living Innovation 4">
-                < img class="photo" src="living-5.jpg" alt="Living Innovation 5">
-                < img class="photo" src="living-6.jpg" alt="Living Innovation 6">
-                < img class="photo" src="living-7.jpg" alt="Living Innovation 7">
-                < img class="photo" src="living-8.jpg" alt="Living Innovation 8">
-                < img class="photo" src="living-9.jpg" alt="Living Innovation 9">
-                < img class="photo" src="living-10.jpg" alt="Living Innovation 10">
-                < img class="photo" src="living-11.jpg" alt="Living Innovation 11">
-                < img class="photo" src="living-12.jpg" alt="Living Innovation 12">
-                < img class="photo" src="living-13.jpg" alt="Living Innovation 13">
-
-            </div>
+            <div id="photoTrack" class="track"></div>
 
         </div>
 
 
-        <!-- Description -->
         <div class="bottom-text">
 
             A visual exploration of how creativity,
@@ -212,5 +163,55 @@
 
     </section>
 
+
+    <script>
+
+        const photos = [
+            "living-1.jpg",
+            "living-2.jpg",
+            "living-3.jpg",
+            "living-4.jpg",
+            "living-5.jpg",
+            "living-6.jpg",
+            "living-7.jpg",
+            "living-8.jpg",
+            "living-9.jpg",
+            "living-10.jpg",
+            "living-11.jpg",
+            "living-12.jpg",
+            "living-13.jpg"
+        ];
+
+
+        const track = document.getElementById("photoTrack");
+
+
+        function createPhotos() {
+
+            const allPhotos = [...photos, ...photos];
+
+
+            allPhotos.forEach(function(fileName) {
+
+                const image = document.createElement("img");
+
+                image.src = fileName;
+
+                image.alt = "Living Innovation";
+
+                image.className = "photo";
+
+                track.appendChild(image);
+
+            });
+
+        }
+
+
+        createPhotos();
+
+    </script>
+
 </body>
+
 </html>
